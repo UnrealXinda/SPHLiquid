@@ -17,6 +17,53 @@ enum class ESPHSolverType
 	PBD   = 2 UMETA(DisplayName = "PBD"),
 };
 
+USTRUCT(BlueprintType)
+struct FSPHSystemConfig
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	ESPHSolverType SolverType;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 1, ClampMax = 10))
+	int32 IterationCount;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 1, ClampMax = 100))
+	int32 SizeX;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 1, ClampMax = 100))
+	int32 SizeY;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 1, ClampMax = 100))
+	int32 SizeZ;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	FVector SpaceSize;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float Spacing;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float TimeStep;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float M0;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float Rho0;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float Stiff;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float Visc;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float SurfaceTensionIntensity;
+
+	UPROPERTY(EditAnywhere, meta = (ClampMin = 0.0))
+	float AirPressure;
+};
 
 /**
  *
@@ -30,21 +77,27 @@ public:
 
 	UInstancedLiquidParticleComponent(const FObjectInitializer& Initializer);
 
-	virtual void InitializeComponent() override;
+	virtual void OnRegister() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	virtual FPrimitiveSceneProxy* CreateSceneProxy() override;
 
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "SPH Config", meta = (ClampMin = 1, ClampMax = 10))
-	int32 IterationCount;
-
-	UPROPERTY(EditAnywhere, Category = "SPH Config")
-	ESPHSolverType SolverType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SPH Config")
+	FSPHSystemConfig SystemConfig;
 
 	TUniquePtr<FFluidSystem>       FluidSystem;
 	TUniquePtr<FSPHParticles>      FluidParticles;
 	TUniquePtr<FBoundaryParticles> BoundaryParticles;
 	TUniquePtr<FFluidSolver>       FluidSolver;
 
-	TArray<FVector> ParticlePositions;
+	TArray<FVector>                ParticlePositions;
+
+protected:
+
+	void InitializeFluidParticles();
+	void InitializeFluidSolver();
+	void InitializeFluidSystem();
+
 };

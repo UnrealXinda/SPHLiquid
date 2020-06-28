@@ -17,12 +17,8 @@ public:
 	FFluidSolver(const FFluidSolver&) = delete;
 	FFluidSolver& operator=(const FFluidSolver&) = delete;
 
-	friend class FFluidSystem;
-
 private:
 
 	struct FImpl;
 	FImpl* Impl;
-
-	std::shared_ptr<class BaseSolver> GetSolverPtr() const;
 };
