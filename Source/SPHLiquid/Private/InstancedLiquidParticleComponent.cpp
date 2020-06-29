@@ -5,10 +5,10 @@
 
 #include "Async/ParallelFor.h"
 
-DECLARE_STATS_GROUP(TEXT("sph"), STATGROUP_SPH, STATCAT_Advanced);
-DECLARE_CYCLE_STAT(TEXT("Step"), STAT_Step, STATGROUP_SPH);
-DECLARE_CYCLE_STAT(TEXT("Copy Back"), STAT_CopyBack, STATGROUP_SPH);
-DECLARE_CYCLE_STAT(TEXT("Update Rendering"), STAT_UpdateRendering, STATGROUP_SPH);
+DECLARE_STATS_GROUP(TEXT("SPH"),              STATGROUP_SPH,        STATCAT_Advanced);
+DECLARE_CYCLE_STAT (TEXT("Step"),             STAT_Step,            STATGROUP_SPH);
+DECLARE_CYCLE_STAT (TEXT("Copy Back"),        STAT_CopyBack,        STATGROUP_SPH);
+DECLARE_CYCLE_STAT (TEXT("Update Rendering"), STAT_UpdateRendering, STATGROUP_SPH);
 
 UInstancedLiquidParticleComponent::UInstancedLiquidParticleComponent(const FObjectInitializer& Initializer)
 {
