@@ -11,4 +11,4 @@ Finally, make changes to Build.cs file to make sure everything is referenced cor
 ![sph_liquid](sph_liquid.gif)
 
 ## Sample Video
-[![](https://img.youtube.com/vi/7ojILF1Dmro/0.jpg)](https://www.youtube.com/watch?v=7ojILF1Dmro&t=0s)
+[![](https://img.youtube.com/vi/7ojILF1Dmro/0.jpg)](https://www.youtube.com/watch?v=7ojILF1Dmro)
